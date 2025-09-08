@@ -3,6 +3,7 @@ import { createProduct, generateDescription } from '../services/products.js'
 import { uploadImages } from '../services/upload.js'
 
 export default function Dashboard(){
+  const VITE_BASE_URL = import.meta.env.VITE_API_BASE || 'http://localhost:3000'
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
   const [category, setCategory] = useState('')
