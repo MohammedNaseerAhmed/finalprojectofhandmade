@@ -36,6 +36,14 @@ orderApp.post('/order', authenticate, handler(async(req,res)=>{
 }))
 orderApp.get('/orders', authenticate, handler(async(req,res)=>{
       let r=await orderModel.find({ userId: req.user.id })
+        .populate("items.productId")
+        .populate({
+            path: "items.productId",
+            populate: {
+                path: "userId",
+                select: "fullname email"
+            }
+        });
     res.status(200).send({message:"getting orders",payload:r})
 }))
 
@@ -70,8 +78,9 @@ orderApp.get('/orders/seller', authenticate, authorizeRoles('seller'), handler(a
                     console.log('Item has no productId or userId:', item);
                     return false;
                 }
-                console.log('Checking item product userId:', item.productId.userId.toString(), 'against seller:', req.user.id);
-                return item.productId.userId.toString() === req.user.id;
+                const productUserId = item.productId.userId._id ? item.productId.userId._id.toString() : item.productId.userId.toString();
+                console.log('Checking item product userId:', productUserId, 'against seller:', req.user.id);
+                return productUserId === req.user.id;
             });
         });
         
@@ -92,7 +101,15 @@ orderApp.get('/orders/seller', authenticate, authorizeRoles('seller'), handler(a
 orderApp.get("/orders/:userId", authenticate, handler(async (req, res) => {
     let { userId } = req.params;
     if (req.user.role === 'buyer' && req.user.id !== userId) return res.status(403).send({ message: 'Forbidden' })
-    let orders = await orderModel.find({ userId }).populate("items.productId");
+    let orders = await orderModel.find({ userId })
+        .populate("items.productId")
+        .populate({
+            path: "items.productId",
+            populate: {
+                path: "userId",
+                select: "fullname email"
+            }
+        });
     res.status(200).send({ message: "Orders fetched", payload: orders });
 }));
 
