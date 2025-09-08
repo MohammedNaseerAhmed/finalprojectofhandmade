@@ -18,6 +18,8 @@ const uploadApp = require('./Apis/UploadApi')
 app.use(exp.json());
 app.use(cors());
 
+app.use('/uploads', express.static('uploads'));
+
 // Optional request logger
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
