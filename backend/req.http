@@ -1,0 +1,156 @@
+###
+post http://localhost:3000/buyer-api/user
+Content-Type: application/json
+
+{
+   
+    "fullname": "Lakshmi Kanth",
+    "email": "kanth@example.com",
+    "password": "$2b$10$abcdefgHashedPassword1", 
+    "role": "buyer",
+    "createdAt": "2025-09-01T10:20:30.000Z",
+    "isActive": true
+}
+###
+post http://localhost:3000/seller-api/user
+Content-Type: application/json
+
+{
+  "fullname": "P",
+  "email": "priya.sr@example.com",
+  "password": "sellerPas23",
+  "role": "seller",
+   "createdAt": "2025-09-01T10:20:30.000Z",
+    "isActive": true
+}
+###
+get http://localhost:3000/seller-api/user/68bc739dbca10b0cf47ef468
+
+###
+put http://localhost:3000/seller-api/user/68bc739dbca10b0cf47ef468
+Content-Type: application/json
+
+{
+  "fullname": "Puja",
+  "email": "pruja.sr@example.com",
+  "password": "sellerPas23",
+  "role": "seller",
+   "createdAt": "2025-09-01T10:20:30.000Z",
+    "isActive": true
+}
+###
+delete http://localhost:3000/seller-api/user/68bc739dbca10b0cf47ef468
+
+
+###
+get http://localhost:3000/seller-api/users
+###
+get http://localhost:3000/buyer-api/users
+
+###
+post http://localhost:3000/product-api/product
+Content-Type: application/json
+
+{
+  "userId": "64fa1c8e8b9c2a001c9d5678",
+  "title": "Handmade Silver Necklace",
+  "useGROQ":"true",
+  "description": "",
+  "category": "jewelry",
+  "price": 2500,
+  "images": [
+    "https://example.com/images/necklace1.jpg",
+    "https://example.com/images/necklace2.jpg"
+  ],
+  "featured": true
+}
+
+###
+get http://localhost:3000/product-api/products
+
+###
+post http://localhost:3000/cart-api/cart
+Content-Type: application/json
+
+{
+  "userId": "64fa1c8e8b9c2a001c9d1234",
+  "items": [
+    {
+      "productId": "64fb2d1a7b9c2a001c9e1111",
+      "quantity": 1
+    },
+    {
+      "productId": "64fb2d1a7b9c2a001c9e2222",
+      "quantity": 3
+    },
+    {
+      "productId": "64fb2d1a7b9c2a001c9e3333",
+      "quantity": 1
+    }
+  ]
+}
+
+
+### 
+get http://localhost:3000/cart-api/carts
+###
+post http://localhost:3000/order-api/order
+Content-Type: application/json
+
+{
+  "userId": "64fa1c8e8b9c2a001c9d1234",
+  "products": [
+    {
+      "productId": "64fb2d1a7b9c2a001c9e1111",
+      "quantity": 2
+    }
+  ],
+  "totalAmount": 5000,
+  "status": "pending"
+}
+
+
+###
+get http://localhost:3000/order-api/orders
+
+###
+post http://localhost:3000/review-api/review
+Content-Type: application/json
+
+{
+  "productId": "64fb2d1a7b9c2a001c9e1111",
+  "userId": "64fa1c8e8b9c2a001c9d1234",
+  "rating": 5,
+  "comment": "Amazing quality and beautiful craftsmanship! Worth every rupee."
+}
+
+
+###
+get http://localhost:3000/review-api/reviews
+
+
+###
+put http://localhost:3000/product-api/product/68bc5b4c482305b78d24a7e6
+Content-Type: application/json
+
+{
+  "userId": "64fa1c8e8b9c2a001c9d5678",
+  "title": "Handmade S",
+  "description": "A beautiful handcrafted silver necklace with intricate designs, perfect for special occasions.",
+  "category": "mwbdk",
+  "price": 2500,
+  "images": [
+    "https://example.com/images/necklace1.jpg",
+    "https://example.com/images/necklace2.jpg"
+  ],
+  "featured": true,
+  "useGROQ":false
+}
+
+###
+post http://localhost:3000/chatbot-api/
+Content-Type: application/json
+
+{
+  "query":" price under 3000 "
+}
