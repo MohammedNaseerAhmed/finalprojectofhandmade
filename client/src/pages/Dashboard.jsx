@@ -85,7 +85,7 @@ export default function Dashboard(){
               <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2">
                 {images.map((img, index) => (
                   <div key={index} className="relative">
-                    <img src={`http://localhost:3000${img}`} alt={`Product ${index + 1}`} className="w-full h-20 object-cover rounded-lg"/>
+                    <img src={`${VITE_BASE_URL}/${img}`} alt={`Product ${index + 1}`} className="w-full h-20 object-cover rounded-lg"/>
                     <button 
                       onClick={() => removeImage(index)}
                       className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600"
